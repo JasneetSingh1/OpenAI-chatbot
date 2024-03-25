@@ -41,3 +41,6 @@ async def chat(request:Request, user_input: Annotated[str, Form()]):
     chat_responses.append(bot_response)
     return templates.TemplateResponse("home.html", {"request":request, "chat_responses": chat_responses})
 
+@app.get("/image", response_class=HTMLResponse)
+async def image_page(request: Request):
+    return templates.TemplateResponse("image.html", {"request": request})
