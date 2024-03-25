@@ -9,11 +9,11 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def chat_page(request: Request):
-    return templates.TemplateResponse("layout.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request})
 
 
 openai = OpenAI(
-    api_key="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"
+    api_key="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"
 )
 
 chatlog = [{'role': 'system',
@@ -22,11 +22,14 @@ chatlog = [{'role': 'system',
                        and syntax. Help create a path of learnting for users to be able to create real life, \
                        production ready python applications.'}]
 
-@app.post("/")
-async def chat(user_input: Annotated[str, Form()]):
+chat_responses = []
+
+@app.post("/", response_class=HTMLResponse)
+async def chat(request:Request, user_input: Annotated[str, Form()]):
 
 
     chatlog.append({'role': 'user', 'content': user_input})
+    chat_responses.append(user_input)
 
     response = openai.chat.completions.create(
         model = 'gpt-3.5-turbo',
@@ -35,5 +38,6 @@ async def chat(user_input: Annotated[str, Form()]):
     )
     bot_response = response.choices[0].message.content
     chatlog.append({'role': 'assistant', 'content': bot_response})
-    return bot_response
+    chat_responses.append(bot_response)
+    return templates.TemplateResponse("home.html", {"request":request, "chat_responses": chat_responses})
 
