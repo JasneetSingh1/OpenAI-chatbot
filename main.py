@@ -3,8 +3,10 @@ from fastapi import FastAPI, Form, Request
 from typing import Annotated
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from mangum import Mangum
 
 app = FastAPI()
+handler = Mangum(app)
 templates = Jinja2Templates(directory="templates")
 chat_responses = []
 
