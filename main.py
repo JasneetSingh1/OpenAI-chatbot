@@ -16,7 +16,7 @@ async def chat_page(request: Request):
 
 
 openai = OpenAI(
-    api_key=""
+    api_key="" #Add your openAI API key here
 )
 
 chatlog = [{'role': 'system',
