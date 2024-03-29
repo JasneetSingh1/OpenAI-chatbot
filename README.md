@@ -1,6 +1,8 @@
 # AI Chatbot
 ![chatbot-web-view.png](chatbot-web-view.png)
+#####
 ![chatbot-image-view.png](chatbot-image-view.png)
+#####
 ![chatbot-phone-view.png](chatbot-phone-view.png)
 ## Introduction
 A cutting-edge chatbot application leveraging OpenAI's state-of-the-art language model API and
